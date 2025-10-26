@@ -358,7 +358,7 @@
             retro-tap;
         };
 
-        // Homerow Mod for the right pinky - TailorKey (influenced)
+        // Homerow Mod for the right pinky - TailorKey (influenced).
         galm_hrm_right: galm_hrm_right {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
