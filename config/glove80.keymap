@@ -378,8 +378,8 @@
             tapping-term-ms = <300>;
             /* tap binding first, hold binding second */
             bindings = <&kp>, <&mo>;
-            flavor = "tap-preferred";
-            quick-tap-ms = <300>;
+            flavor = "hold-preferred";
+            quick-tap-ms = <200>;
         };
 
         symb: symb {
@@ -388,8 +388,8 @@
             tapping-term-ms = <300>;
             /* tap binding first, hold binding second */
             bindings = <&kp>, <&mo>;
-            flavor = "tap-preferred";
-            quick-tap-ms = <300>;
+            flavor = "hold-preferred";
+            quick-tap-ms = <200>;
         };
     };
 };
