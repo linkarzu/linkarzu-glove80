@@ -372,24 +372,22 @@
             retro-tap;
         };
 
-        nav_l: nav_l {
+        navig: navig {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <300>;
-            quick-tap-ms = <300>;
-            /* tap binding first, hold binding second */
-            bindings = <&kp>, <&mo>;
             flavor = "tap-preferred";
+            tapping-term-ms = <300>;
+            bindings = <&mo>, <&kp>;
+            display-name = "Navigation-Layer";
         };
 
-        symb_l: symb_l {
+        symbl: symbl {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <300>;
-            quick-tap-ms = <300>;
-            /* tap binding first, hold binding second */
-            bindings = <&kp>, <&mo>;
             flavor = "tap-preferred";
+            tapping-term-ms = <300>;
+            bindings = <&mo>, <&kp>;
+            display-name = "Symbol-Layer";
         };
     };
 };
@@ -408,9 +406,9 @@
               &kp F1                &kp F2             &kp F3             &kp F4               &kp F5                                                                                                                          &kp F6                 &kp F7                &kp F8               &kp F9                &kp F10
               &kp GRAVE             &kp N1             &kp N2             &kp N3               &kp N4                 &kp N5                                                                               &kp N6              &kp N7                 &kp N8                &kp N9               &kp N0                &kp MINUS
               &kp TAB               &kp Q              &kp W              &kp E                &kp R                  &kp T                                                                                &kp Y               &kp U                  &kp I                 &kp O                &kp P                 &kp BSLH
-              &nav_l ESC LAYER_Nav  &hrm_l LCTRL A     &kp S              &hrm_l LGUI D        &hrm_l LALT F          &kp G                                                                                &kp H               &hrm_r RALT J          &hrm_r RGUI K         &kp L                &hrm_r RCTRL SEMI     &kp SQT
+              &navig LAYER_Nav ESC  &hrm_l LCTRL A     &kp S              &hrm_l LGUI D        &hrm_l LALT F          &kp G                                                                                &kp H               &hrm_r RALT J          &hrm_r RGUI K         &kp L                &hrm_r RCTRL SEMI     &kp SQT
               &kp LSHFT             &kp Z              &kp X              &kp C                &kp V                  &kp B    &kp LGUI   &kp LALT                &lower   &kp RCTRL  &kp RALT &kp RGUI    &kp N               &kp M                  &kp COMMA             &kp DOT              &kp FSLH              &kp RSHFT
-              &magic LAYER_Magic 0  &kp LCTRL          &kp LG(GRAVE)      &kp LEFT             &kp RIGHT                       &kp SPACE  &symb_l BSPC LAYER_Symb &kp DEL  &kp RSHFT  &kp RET  &kp SPACE                       &kp DOWN               &kp UP                &kp LBKT             &kp RBKT              &kp ESC
+              &magic LAYER_Magic 0  &kp LCTRL          &kp LG(GRAVE)      &kp LEFT             &kp RIGHT                       &kp SPACE  &symbl LAYER_Symb BSPC  &kp DEL  &kp RSHFT  &kp RET  &kp SPACE                       &kp DOWN               &kp UP                &kp LBKT             &kp RBKT              &kp ESC
             >;
         };
 
