@@ -380,8 +380,6 @@
             bindings = <&kp>, <&mo>;
             flavor = "tap-preferred";
             quick-tap-ms = <300>;
-            require-prior-idle-ms = <0>;
-            retro-tap;
         };
 
         symb: symb {
@@ -392,8 +390,6 @@
             bindings = <&kp>, <&mo>;
             flavor = "tap-preferred";
             quick-tap-ms = <300>;
-            require-prior-idle-ms = <0>;
-            retro-tap;
         };
     };
 };
