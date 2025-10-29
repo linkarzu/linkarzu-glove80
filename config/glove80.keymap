@@ -29,6 +29,8 @@
 #define LAYER_Factory 3
 #define LAYER_Nav 4
 #define LAYER_Symb 5
+#define LAYER_Subl 6
+#define LAYER_Apps 7
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -404,12 +406,12 @@
 
         layer_Base {
             bindings = <
-              &kp F1                &kp F2             &kp F3             &kp F4               &kp F5                                                                                                                          &kp F6                 &kp F7                &kp F8                     &kp F9                &kp F10
-              &kp GRAVE             &kp N1             &kp N2             &kp N3               &kp N4                 &kp N5                                                                               &kp N6              &kp N7                 &kp N8                &kp N9                     &kp N0                &kp MINUS
-              &mt RET TAB           &kp Q              &kp W              &kp E                &kp R                  &kp T                                                                                &kp Y               &kp U                  &kp I                 &kp O                      &kp P                 &kp BSLH
-              &lt LAYER_Nav ESC     &hrm_l LCTRL A     &kp S              &hrm_l LGUI D        &hrm_l LALT F          &mt LC(Z) G                                                                          &kp H               &hrm_r RALT J          &hrm_r RGUI K         &mt LG(LC(LA(LS(Z)))) L    &hrm_r RCTRL SEMI     &kp SQT
-              &kp LSHFT             &mt LG(TAB) Z      &mt LG(GRAVE) X    &mt LG(C) C          &mt LG(V) V            &kp B    &kp LGUI   &kp LALT                &lower   &kp RCTRL  &kp RALT &kp RGUI    &kp N               &kp M                  &kp COMMA             &mt LG(LC(LA(LS(6)))) DOT  &kp FSLH              &kp RSHFT
-              &magic LAYER_Magic 0  &kp LCTRL          &kp LG(GRAVE)      &kp LEFT             &kp RIGHT                       &kp SPACE  &lt LAYER_Symb BSPC     &kp DEL  &kp RSHFT  &kp RET  &kp SPACE                       &kp DOWN               &kp UP                &kp LBKT                   &kp RBKT              &kp ESC
+              &kp F1                &kp F2             &kp F3             &kp F4               &kp F5                                                                                                                                    &kp F6                 &kp F7                &kp F8                     &kp F9                &kp F10
+              &kp GRAVE             &kp N1             &kp N2             &kp N3               &kp N4                 &kp N5                                                                                         &kp N6              &kp N7                 &kp N8                &kp N9                     &kp N0                &kp MINUS
+              &mt RET TAB           &kp Q              &kp W              &kp E                &kp R                  &kp T                                                                                          &kp Y               &kp U                  &kp I                 &kp O                      &kp P                 &kp BSLH
+              &lt LAYER_Nav ESC     &hrm_l LCTRL A     &kp S              &hrm_l LGUI D        &hrm_l LALT F          &mt LC(Z) G                                                                                    &kp H               &hrm_r RALT J          &hrm_r RGUI K         &mt LG(LC(LA(LS(Z)))) L    &hrm_r RCTRL SEMI     &kp SQT
+              &kp LSHFT             &mt LG(TAB) Z      &mt LG(GRAVE) X    &mt LG(C) C          &mt LG(V) V            &kp B       &kp LGUI   &kp LALT             &lower   &kp RCTRL  &kp RALT           &kp RGUI    &kp N               &kp M                  &kp COMMA             &mt LG(LC(LA(LS(6)))) DOT  &kp FSLH              &kp RSHFT
+              &magic LAYER_Magic 0  &kp LCTRL          &kp LG(GRAVE)      &kp LEFT             &kp RIGHT                          &kp SPACE  &lt LAYER_Symb BSPC  &kp DEL  &kp RSHFT  &lt LAYER_Subl RET &kp SPACE                       &kp DOWN               &kp UP                &kp LBKT                   &kp RBKT              &kp ESC
             >;
         };
 
@@ -464,6 +466,28 @@
               &kp LS(MINUS)              &kp LS(N1)                 &kp LS(N2)                &kp LS(N3)               &kp LS(N4)            &kp LS(N5)                                                                   &kp LS(N6)             &kp LS(N7)              &kp LS(N8)             &kp LS(N9)              &kp LS(N0)                &kp MINUS
               &kp LS(GRAVE)              &kp N1                     &kp N2                    &kp N3                   &kp N4                &kp N5                                                                       &kp N6                 &kp N7                  &kp N8                 &kp N9                  &kp N0                    &kp GRAVE
               &kp LS(EQUAL)              &kp LS(COMMA)              &kp LS(DOT)               &kp LS(FSLH)             &kp LBKT              &kp RBKT               &trans  &trans  &trans  &trans  &trans  &trans        &kp LS(LBKT)           &kp LS(RBKT)            &kp COMMA              &kp DOT                 &kp FSLH                  &kp EQUAL
+              &trans                     &trans                     &trans                    &trans                   &trans                                       &trans  &trans  &trans  &trans  &trans  &trans                               &trans                  &trans                 &trans                  &trans                    &trans
+            >;
+        };
+
+        layer_Subl {
+            bindings = <
+              &trans                     &trans                     &trans                    &trans                   &trans                                                                                                                                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                                    &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                                    &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                                    &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                 &trans  &trans               &trans  &trans  &trans  &trans        &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                                       &trans  &lt LAYER_Apps BSPC  &trans  &trans  &trans  &trans                               &trans                  &trans                 &trans                  &trans                    &trans
+            >;
+        };
+
+        layer_Apps {
+            bindings = <
+              &trans                     &trans                     &trans                    &trans                   &trans                                                                                                                    &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                       &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &kp Z                      &trans                    &trans                   &trans                &trans                                                                       &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &kp F13                    &trans                    &trans                   &trans                &trans                                                                       &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                 &trans  &trans  &trans  &trans  &trans  &trans        &trans                 &trans                  &trans                 &trans                  &trans                    &trans
               &trans                     &trans                     &trans                    &trans                   &trans                                       &trans  &trans  &trans  &trans  &trans  &trans                               &trans                  &trans                 &trans                  &trans                    &trans
             >;
         };
