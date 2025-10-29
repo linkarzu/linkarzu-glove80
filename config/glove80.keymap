@@ -418,28 +418,6 @@
             >;
         };
 
-        layer_Nav {
-            bindings = <
-              &trans                     &trans                     &trans                    &trans                   &trans                                                                                                              &trans                &trans               &trans                &trans                    &trans
-              &trans                     &trans                     &trans                    &trans                   &trans          &trans                                                                       &trans                 &trans                &trans               &trans                &trans                    &trans
-              &kp LG(LC(LA(LS(TAB))))    &kp LG(LC(LA(LS(N0))))     &kp LG(LC(LA(LS(W))))     &kp LG(LC(LA(LS(D))))    &trans          &trans                                                                       &kp LA(LS(LEFT))       &kp LA(LS(DOWN))      &kp LA(LS(UP))       &kp LA(LS(RIGHT))     &trans                    &trans
-              &trans                     &kp LG(LC(LA(LS(EQUAL))))  &kp LG(LC(LA(LS(N9))))    &kp LG(LBKT)             &kp LG(RBKT)    &kp LG(LC(LA(LS(G))))                                                        &kp LEFT               &kp DOWN              &kp UP               &kp RIGHT             &kp LG(LC(LA(LS(SEMI))))  &trans
-              &trans                     &trans                     &trans                    &trans                   &trans          &trans                 &trans  &trans  &trans  &trans  &trans  &trans        &trans                 &trans                &trans               &trans                &trans                    &trans
-              &trans                     &trans                     &trans                    &trans                   &trans                                 &trans  &trans  &trans  &trans  &trans  &trans                               &trans                &trans               &trans                &trans                    &trans
-            >;
-        };
-
-        layer_Symb {
-            bindings = <
-              &trans                     &trans                     &trans                    &trans                   &trans                                                                                                                    &trans                  &trans                 &trans                  &trans                    &trans
-              &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                       &trans                 &trans                  &trans                 &trans                  &trans                    &trans
-              &kp LS(MINUS)              &kp LS(N1)                 &kp LS(N2)                &kp LS(N3)               &kp LS(N4)            &kp LS(N5)                                                                   &kp LS(N6)             &kp LS(N7)              &kp LS(N8)             &kp LS(N9)              &kp LS(N0)                &kp MINUS
-              &kp LS(GRAVE)              &kp N1                     &kp N2                    &kp N3                   &kp N4                &kp N5                                                                       &kp N6                 &kp N7                  &kp N8                 &kp N9                  &kp N0                    &kp GRAVE
-              &kp LS(EQUAL)              &kp LS(COMMA)              &kp LS(DOT)               &kp LS(FSLH)             &kp LBKT              &kp RBKT               &trans  &trans  &trans  &trans  &trans  &trans        &kp LS(LBKT)           &kp LS(RBKT)            &kp COMMA              &kp DOT                 &kp FSLH                  &kp EQUAL
-              &trans                     &trans                     &trans                    &trans                   &trans                                       &trans  &trans  &trans  &trans  &trans  &trans                               &trans                  &trans                 &trans                  &trans                    &trans
-            >;
-        };
-
         layer_Lower {
             bindings = <
          &kp C_BRI_DN  &kp C_BRI_UP      &kp C_PREV      &kp C_NEXT   &kp C_PP                                                                                        &trans        &trans        &trans          &kp F11          &kp F12
@@ -470,6 +448,28 @@
  &kp NUMBER_3  &kp NUMBER_9  &kp NUMBER_5  &kp NUMBER_1  &kp NUMBER_7  &kp NUMBER_2                                                                                      &kp NUMBER_2  &kp NUMBER_7  &kp NUMBER_1  &kp NUMBER_5  &kp NUMBER_9  &kp NUMBER_3
  &kp NUMBER_4  &kp NUMBER_0  &kp NUMBER_6  &kp NUMBER_2  &kp NUMBER_8  &kp NUMBER_3  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp NUMBER_6  &kp NUMBER_5  &kp NUMBER_4  &kp NUMBER_3  &kp NUMBER_8  &kp NUMBER_2  &kp NUMBER_6  &kp NUMBER_0  &kp NUMBER_4
  &kp NUMBER_5  &kp NUMBER_1  &kp NUMBER_7  &kp NUMBER_3  &kp NUMBER_9                &kp NUMBER_7  &kp NUMBER_8  &kp NUMBER_9  &kp NUMBER_9  &kp NUMBER_8  &kp NUMBER_7                &kp NUMBER_9  &kp NUMBER_3  &kp NUMBER_7  &kp NUMBER_1  &kp NUMBER_5
+            >;
+        };
+
+        layer_Nav {
+            bindings = <
+              &trans                     &trans                     &trans                    &trans                   &trans                                                                                                              &trans                &trans               &trans                &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans          &trans                                                                       &trans                 &trans                &trans               &trans                &trans                    &trans
+              &kp LG(LC(LA(LS(TAB))))    &kp LG(LC(LA(LS(N0))))     &kp LG(LC(LA(LS(W))))     &kp LG(LC(LA(LS(D))))    &trans          &trans                                                                       &kp LA(LS(LEFT))       &kp LA(LS(DOWN))      &kp LA(LS(UP))       &kp LA(LS(RIGHT))     &trans                    &trans
+              &trans                     &kp LG(LC(LA(LS(EQUAL))))  &kp LG(LC(LA(LS(N9))))    &kp LG(LBKT)             &kp LG(RBKT)    &kp LG(LC(LA(LS(G))))                                                        &kp LEFT               &kp DOWN              &kp UP               &kp RIGHT             &kp LG(LC(LA(LS(SEMI))))  &trans
+              &trans                     &trans                     &trans                    &trans                   &trans          &trans                 &trans  &trans  &trans  &trans  &trans  &trans        &trans                 &trans                &trans               &trans                &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                                 &trans  &trans  &trans  &trans  &trans  &trans                               &trans                &trans               &trans                &trans                    &trans
+            >;
+        };
+
+        layer_Symb {
+            bindings = <
+              &trans                     &trans                     &trans                    &trans                   &trans                                                                                                                    &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                       &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &kp LS(MINUS)              &kp LS(N1)                 &kp LS(N2)                &kp LS(N3)               &kp LS(N4)            &kp LS(N5)                                                                   &kp LS(N6)             &kp LS(N7)              &kp LS(N8)             &kp LS(N9)              &kp LS(N0)                &kp MINUS
+              &kp LS(GRAVE)              &kp N1                     &kp N2                    &kp N3                   &kp N4                &kp N5                                                                       &kp N6                 &kp N7                  &kp N8                 &kp N9                  &kp N0                    &kp GRAVE
+              &kp LS(EQUAL)              &kp LS(COMMA)              &kp LS(DOT)               &kp LS(FSLH)             &kp LBKT              &kp RBKT               &trans  &trans  &trans  &trans  &trans  &trans        &kp LS(LBKT)           &kp LS(RBKT)            &kp COMMA              &kp DOT                 &kp FSLH                  &kp EQUAL
+              &trans                     &trans                     &trans                    &trans                   &trans                                       &trans  &trans  &trans  &trans  &trans  &trans                               &trans                  &trans                 &trans                  &trans                    &trans
             >;
         };
 
