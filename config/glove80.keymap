@@ -28,6 +28,7 @@
 #define LAYER_Magic 2
 #define LAYER_Factory 3
 #define LAYER_Navigation 4
+#define LAYER_Symbol 5
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -377,6 +378,7 @@
             tapping-term-ms = <300>;
             /* tap binding first, hold binding second */
             bindings = <&kp>, <&mo>;
+            flavor = "tap-preferred";
             quick-tap-ms = <300>;
             require-prior-idle-ms = <0>;
             retro-tap;
@@ -388,6 +390,7 @@
             tapping-term-ms = <300>;
             /* tap binding first, hold binding second */
             bindings = <&kp>, <&mo>;
+            flavor = "tap-preferred";
             quick-tap-ms = <300>;
             require-prior-idle-ms = <0>;
             retro-tap;
