@@ -380,6 +380,9 @@
             flavor = "tap-preferred";
             tapping-term-ms = <300>;
             bindings = <&kp>, <&kp>;
+            quick-tap-ms = <300>;
+            require-prior-idle-ms = <0>;
+            retro-tap;
         };
 
         /* symbl: symbl { */
