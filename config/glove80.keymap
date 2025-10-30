@@ -31,6 +31,7 @@
 #define LAYER_Symb 5
 #define LAYER_Subl 6
 #define LAYER_Apps 7
+#define LAYER_Sesss 8
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -473,7 +474,7 @@
             bindings = <
               &trans                     &trans                     &trans                    &trans                   &trans                                                                                                                                 &trans                  &trans                 &trans                  &trans                    &trans
               &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                                    &trans                 &trans                  &trans                 &trans                  &trans                    &trans
-              &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                                    &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &lt LAYER_Sesss T                                                                         &trans                 &trans                  &trans                 &trans                  &trans                    &trans
               &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                                    &trans                 &trans                  &trans                 &trans                  &trans                    &trans
               &trans                     &trans                     &trans                    &trans                   &trans                &trans                 &trans  &trans               &trans  &trans  &trans  &trans        &trans                 &trans                  &trans                 &trans                  &trans                    &trans
               &trans                     &trans                     &trans                    &trans                   &trans                                       &trans  &lt LAYER_Apps BSPC  &trans  &trans  &trans  &trans                               &trans                  &trans                 &trans                  &trans                    &trans
@@ -487,6 +488,17 @@
               &trans                     &kp LS(LC(F1))             &kp LS(LC(F2))            &kp LS(LC(F3))           &kp LS(LC(F4))        &kp LS(LC(F5))                                                               &kp LS(LC(F6))         &kp LS(LC(F7))          &kp LS(LC(F8))         &kp LS(LC(F9))          &kp LS(LC(F10))           &kp LS(LC(F11))
               &trans                     &kp LS(LC(F12))            &kp LS(LC(F13))           &kp LC(LA(F16))          &kp LC(LA(F17))       &kp LS(LC(F16))                                                              &kp LS(LC(F17))        &kp LS(LC(F18))         &kp LS(LC(F19))        &kp LC(LA(F18))         &kp LC(LA(F12))           &kp LC(LA(F13))
               &trans                     &kp LC(LA(F1))             &kp LC(LA(F2))            &kp LC(LA(F3))           &kp LC(LA(F4))        &kp LC(LA(F5))         &trans  &trans  &trans  &trans  &trans  &trans        &kp LC(LA(F6))         &kp LC(LA(F7))          &kp LC(LA(F8))         &kp LC(LA(F9))          &kp LC(LA(F10))           &kp LC(LA(F11))
+              &trans                     &trans                     &trans                    &trans                   &trans                                       &trans  &trans  &trans  &trans  &trans  &trans                               &trans                  &trans                 &trans                  &trans                    &trans
+            >;
+        };
+
+        layer_Sesss {
+            bindings = <
+              &trans                     &trans                     &trans                    &trans                   &trans                                                                                                                    &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                       &trans                 &trans                  &trans                 &trans                  &trans                    &trans
+              &trans                     &trans                     &trans                    &kp LC(LA(F12))          &kp LC(LA(F13))       &trans                                                                       &kp LC(LA(F16))        &kp LC(LA(F17))         &kp LC(LA(F18))        &kp LC(LA(F19))         &kp LC(LG(F1))            &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                                                                       &kp LC(LG(F2))         &kp LC(LG(F3))          &kp LC(LG(F4))         &kp LC(LG(F5))          &kp LC(LG(F6))            &trans
+              &trans                     &trans                     &trans                    &trans                   &trans                &trans                 &trans  &trans  &trans  &trans  &trans  &trans        &kp LC(LG(F7))         &kp LC(LG(F8))          &kp LC(LG(F9))         &kp LC(LG(F10))         &kp LC(LG(F11))            &trans
               &trans                     &trans                     &trans                    &trans                   &trans                                       &trans  &trans  &trans  &trans  &trans  &trans                               &trans                  &trans                 &trans                  &trans                    &trans
             >;
         };
