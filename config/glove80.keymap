@@ -374,15 +374,15 @@
             retro-tap;
         };
 
-        /* navig: navig { */
-        /*     compatible = "zmk,behavior-hold-tap"; */
-        /*     #binding-cells = <2>; */
-        /*     flavor = "tap-preferred"; */
-        /*     tapping-term-ms = <300>; */
-        /*     bindings = <&mo>, <&kp>; */
-        /*     display-name = "Navigation-Layer"; */
-        /* }; */
-        /**/
+        my_mt: my_mt {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <300>;
+            bindings = <&mo>, <&kp>;
+            display-name = "my-own-mt";
+        };
+
         /* symbl: symbl { */
         /*     compatible = "zmk,behavior-hold-tap"; */
         /*     #binding-cells = <2>; */
@@ -408,9 +408,9 @@
             bindings = <
               &kp F1                &kp F2             &kp F3             &kp F4               &kp F5                                                                                                                                    &kp F6                 &kp F7                &kp F8                     &kp F9                &kp F10
               &kp GRAVE             &kp N1             &kp N2             &kp N3               &kp N4                 &kp N5                                                                                         &kp N6              &kp N7                 &kp N8                &kp N9                     &kp N0                &kp MINUS
-              &mt RET TAB           &kp Q              &kp W              &kp E                &kp R                  &kp T                                                                                          &kp Y               &kp U                  &kp I                 &kp O                      &kp P                 &kp BSLH
-              &lt LAYER_Nav ESC     &hrm_l LCTRL A     &kp S              &hrm_l LGUI D        &hrm_l LALT F          &mt LC(Z) G                                                                                    &kp H               &hrm_r RALT J          &hrm_r RGUI K         &mt LG(LC(LA(LS(Z)))) L    &hrm_r RCTRL SEMI     &kp SQT
-              &kp LSHFT             &mt LG(TAB) Z      &mt LG(GRAVE) X    &mt LG(C) C          &mt LG(V) V            &kp B       &kp LGUI   &kp LALT             &lower   &kp RCTRL  &kp RALT           &kp RGUI    &kp N               &kp M                  &kp COMMA             &mt LG(LC(LA(LS(6)))) DOT  &kp FSLH              &kp RSHFT
+              &my_mt RET TAB           &kp Q              &kp W              &kp E                &kp R                  &kp T                                                                                          &kp Y               &kp U                  &kp I                 &kp O                      &kp P                 &kp BSLH
+              &lt LAYER_Nav ESC     &hrm_l LCTRL A     &kp S              &hrm_l LGUI D        &hrm_l LALT F          &my_mt LC(Z) G                                                                                    &kp H               &hrm_r RALT J          &hrm_r RGUI K         &my_mt LG(LC(LA(LS(Z)))) L    &hrm_r RCTRL SEMI     &kp SQT
+              &kp LSHFT             &my_mt LG(TAB) Z      &my_mt LG(GRAVE) X    &my_mt LG(C) C          &my_mt LG(V) V            &kp B       &kp LGUI   &kp LALT             &lower   &kp RCTRL  &kp RALT           &kp RGUI    &kp N               &kp M                  &kp COMMA             &my_mt LG(LC(LA(LS(6)))) DOT  &kp FSLH              &kp RSHFT
               &magic LAYER_Magic 0  &kp LCTRL          &kp LG(GRAVE)      &kp LEFT             &kp RIGHT                          &kp SPACE  &lt LAYER_Symb BSPC  &kp DEL  &kp RSHFT  &lt LAYER_Subl RET &kp SPACE                       &kp DOWN               &kp UP                &kp LBKT                   &kp RBKT              &kp ESC
             >;
         };
