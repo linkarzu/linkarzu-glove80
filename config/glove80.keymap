@@ -377,10 +377,9 @@
         my_mt: my_mt {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            flavor = "hold-preferred";
+            flavor = "tap-preferred";
             tapping-term-ms = <300>;
-            bindings = <&mo>, <&kp>;
-            display-name = "my-own-mt";
+            bindings = <&kp>, <&kp>;
         };
 
         /* symbl: symbl { */
