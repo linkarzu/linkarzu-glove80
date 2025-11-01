@@ -37,6 +37,7 @@
 #define LAYER_Yabai 11
 #define LAYER_Raycast 12
 #define LAYER_Letters 13
+#define LAYER_Obs 14
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -578,25 +579,25 @@
 
         layer_Subl {
             bindings = <
-//    ┌─────┬─────┬──────────────────────┬─────┬──────────────────────┐                                                                                   ┌─────┬─────┬─────┬─────┬─────┐
-//    │     │     │                      │     │                      │                                                                                   │     │     │     │     │     │
-//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┐                                                        ┌─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │                      │     │                      │                    │                                                        │     │     │     │     │     │     │
-//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┤                                                        ├─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │                      │     │ lt laltYER_Raycast R │ lt laltYER_Sesss T │                                                        │     │     │     │     │     │     │
-//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┤                                                        ├─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │ lt laltYER_Letters S │     │                      │                    │                                                        │     │     │     │     │     │     │
-//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┼─────┬──────────────────────┬─────┐   ┌─────┬─────┬─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │                      │     │                      │                    │     │                      │     │   │     │     │     │     │     │     │     │     │     │
-//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┼─────┼──────────────────────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │                      │     │                      │                    │     │ lt laltYER_Apps bspc │     │   │     │     │     │     │     │     │     │     │     │
-//    └─────┴─────┴──────────────────────┴─────┴──────────────────────┘                    └─────┴──────────────────────┴─────┘   └─────┴─────┴─────┘     └─────┴─────┴─────┴─────┴─────┘
-  &trans   &trans   &trans                &trans   &trans                                                                                                                    &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &trans                &trans   &trans                &trans                                                                                     &trans   &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &trans                &trans   &lt LAYER_Raycast R   &lt LAYER_Sesss T                                                                          &trans   &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &lt LAYER_Letters S   &trans   &trans                &trans                                                                                     &trans   &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &trans                &trans   &trans                &trans              &trans   &trans                &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &trans                &trans   &trans                                    &trans   &lt LAYER_Apps BSPC   &trans       &trans   &trans   &trans            &trans   &trans   &trans   &trans   &trans
+//    ┌─────┬─────┬────────────────────┬─────┬────────────────────┐                                                                            ┌─────┬─────┬────────────────┬─────┬─────┐
+//    │     │     │                    │     │                    │                                                                            │     │     │                │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┐                                                   ┌─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │                    │     │                    │                  │                                                   │     │     │     │                │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┤                                                   ├─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │                    │     │ mo laltYER_Raycast │ mo laltYER_Sesss │                                                   │     │     │     │ mo laltYER_Obs │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┤                                                   ├─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │ mo laltYER_Letters │     │                    │                  │                                                   │     │     │     │                │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┼─────┬─────────────────┬─────┐   ┌─────┬─────┬─────┼─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │                    │     │                    │                  │     │                 │     │   │     │     │     │     │     │     │                │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┼─────┼─────────────────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │                    │     │                    │                  │     │ mo laltYER_Apps │     │   │     │     │     │     │     │     │                │     │     │
+//    └─────┴─────┴────────────────────┴─────┴────────────────────┘                  └─────┴─────────────────┴─────┘   └─────┴─────┴─────┘     └─────┴─────┴────────────────┴─────┴─────┘
+  &trans   &trans   &trans              &trans   &trans                                                                                                           &trans   &trans   &trans          &trans   &trans
+  &trans   &trans   &trans              &trans   &trans              &trans                                                                              &trans   &trans   &trans   &trans          &trans   &trans
+  &trans   &trans   &trans              &trans   &mo LAYER_Raycast   &mo LAYER_Sesss                                                                     &trans   &trans   &trans   &mo LAYER_Obs   &trans   &trans
+  &trans   &trans   &mo LAYER_Letters   &trans   &trans              &trans                                                                              &trans   &trans   &trans   &trans          &trans   &trans
+  &trans   &trans   &trans              &trans   &trans              &trans            &trans   &trans           &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans          &trans   &trans
+  &trans   &trans   &trans              &trans   &trans                                &trans   &mo LAYER_Apps   &trans       &trans   &trans   &trans            &trans   &trans   &trans          &trans   &trans
             >;
         };
 
@@ -742,6 +743,30 @@
   &trans   &trans   &trans   &kp LS(LG(F4))   &trans   &trans                                                             &kp LS(LG(F8))    &kp LS(LG(F9))    &kp LS(LG(F10))   &trans   &trans   &trans
   &trans   &trans   &trans   &trans           &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &kp LS(LG(F11))   &kp LS(LG(F12))   &kp LS(LG(F13))   &trans   &trans   &trans
   &trans   &trans   &trans   &trans           &trans            &trans   &trans   &trans       &trans   &trans   &trans                     &trans            &trans            &trans   &trans   &trans
+            >;
+        };
+
+        layer_Obs {
+            bindings = <
+//    ┌─────┬─────┬─────┬─────┬─────┐                                                   ┌─────┬─────┬─────┬─────┬─────┐
+//    │     │     │     │     │     │                                                   │     │     │     │     │     │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┐                                       ┌─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │     │     │     │     │                                       │     │     │     │     │     │     │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┤                                       ├─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │     │     │     │     │                                       │     │     │     │     │     │     │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┤                                       ├─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │     │     │     │     │                                       │     │     │     │     │     │     │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┼─────┬─────┬─────┐   ┌─────┬─────┬─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │     │     │     │     │     │     │     │   │     │     │     │     │     │     │     │     │     │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │     │     │     │     │     │     │     │   │     │     │     │     │     │     │     │     │     │
+//    └─────┴─────┴─────┴─────┴─────┘     └─────┴─────┴─────┘   └─────┴─────┴─────┘     └─────┴─────┴─────┴─────┴─────┘
+  &trans   &trans   &trans   &trans   &trans                                                                               &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &trans   &trans   &trans   &trans                                                             &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &trans   &trans   &trans   &trans                                                             &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &trans   &trans   &trans   &trans                                                             &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &trans   &trans   &trans            &trans   &trans   &trans       &trans   &trans   &trans            &trans   &trans   &trans   &trans   &trans
             >;
         };
 
