@@ -35,6 +35,8 @@
 #define LAYER_Sesss 9
 #define LAYER_Systm 10
 #define LAYER_Yabai 11
+#define LAYER_Raycast 12
+#define LAYER_Letters 13
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -576,25 +578,25 @@
 
         layer_Subl {
             bindings = <
-//    ┌─────┬─────┬─────┬─────┬─────┐                                                                                   ┌─────┬─────┬─────┬─────┬─────┐
-//    │     │     │     │     │     │                                                                                   │     │     │     │     │     │
-//    ├─────┼─────┼─────┼─────┼─────┼────────────────────┐                                                        ┌─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │     │     │     │                    │                                                        │     │     │     │     │     │     │
-//    ├─────┼─────┼─────┼─────┼─────┼────────────────────┤                                                        ├─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │     │     │     │ lt laltYER_Sesss T │                                                        │     │     │     │     │     │     │
-//    ├─────┼─────┼─────┼─────┼─────┼────────────────────┤                                                        ├─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │     │     │     │                    │                                                        │     │     │     │     │     │     │
-//    ├─────┼─────┼─────┼─────┼─────┼────────────────────┼─────┬──────────────────────┬─────┐   ┌─────┬─────┬─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │     │     │     │                    │     │                      │     │   │     │     │     │     │     │     │     │     │     │
-//    ├─────┼─────┼─────┼─────┼─────┼────────────────────┼─────┼──────────────────────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
-//    │     │     │     │     │     │                    │     │ lt laltYER_Apps bspc │     │   │     │     │     │     │     │     │     │     │     │
-//    └─────┴─────┴─────┴─────┴─────┘                    └─────┴──────────────────────┴─────┘   └─────┴─────┴─────┘     └─────┴─────┴─────┴─────┴─────┘
-  &trans   &trans   &trans   &trans   &trans                                                                                                       &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &trans   &trans   &trans   &trans                                                                                     &trans   &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &trans   &trans   &trans   &lt LAYER_Sesss T                                                                          &trans   &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &trans   &trans   &trans   &trans                                                                                     &trans   &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &trans   &trans   &trans   &trans              &trans   &trans                &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
-  &trans   &trans   &trans   &trans   &trans                       &trans   &lt LAYER_Apps BSPC   &trans       &trans   &trans   &trans            &trans   &trans   &trans   &trans   &trans
+//    ┌─────┬─────┬──────────────────────┬─────┬──────────────────────┐                                                                                   ┌─────┬─────┬─────┬─────┬─────┐
+//    │     │     │                      │     │                      │                                                                                   │     │     │     │     │     │
+//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┐                                                        ┌─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │                      │     │                      │                    │                                                        │     │     │     │     │     │     │
+//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┤                                                        ├─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │                      │     │ lt laltYER_Raycast R │ lt laltYER_Sesss T │                                                        │     │     │     │     │     │     │
+//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┤                                                        ├─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │ lt laltYER_Letters S │     │                      │                    │                                                        │     │     │     │     │     │     │
+//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┼─────┬──────────────────────┬─────┐   ┌─────┬─────┬─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │                      │     │                      │                    │     │                      │     │   │     │     │     │     │     │     │     │     │     │
+//    ├─────┼─────┼──────────────────────┼─────┼──────────────────────┼────────────────────┼─────┼──────────────────────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │     │                      │     │                      │                    │     │ lt laltYER_Apps bspc │     │   │     │     │     │     │     │     │     │     │     │
+//    └─────┴─────┴──────────────────────┴─────┴──────────────────────┘                    └─────┴──────────────────────┴─────┘   └─────┴─────┴─────┘     └─────┴─────┴─────┴─────┴─────┘
+  &trans   &trans   &trans                &trans   &trans                                                                                                                    &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &trans                &trans   &trans                &trans                                                                                     &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &trans                &trans   &lt LAYER_Raycast R   &lt LAYER_Sesss T                                                                          &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &lt LAYER_Letters S   &trans   &trans                &trans                                                                                     &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &trans                &trans   &trans                &trans              &trans   &trans                &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans   &trans                &trans   &trans                                    &trans   &lt LAYER_Apps BSPC   &trans       &trans   &trans   &trans            &trans   &trans   &trans   &trans   &trans
             >;
         };
 
@@ -692,6 +694,54 @@
   &trans   &trans   &trans   &trans   &trans   &trans                                                             &trans   &trans   &trans   &trans   &trans   &trans
   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans
   &trans   &trans   &trans   &trans   &trans            &trans   &trans   &trans       &trans   &trans   &trans            &trans   &trans   &trans   &trans   &trans
+            >;
+        };
+
+        layer_Raycast {
+            bindings = <
+//    ┌─────┬─────┬─────┬─────────────────┬─────┐                                                               ┌─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────┐
+//    │     │     │     │                 │     │                                                               │                 │                 │                 │                 │     │
+//    ├─────┼─────┼─────┼─────────────────┼─────┼─────┐                                       ┌─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │     │     │     │                 │     │     │                                       │                 │                 │                 │                 │                 │     │
+//    ├─────┼─────┼─────┼─────────────────┼─────┼─────┤                                       ├─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │     │     │     │ lgui(lalt(f10)) │     │     │                                       │ lgui(lalt(f18)) │ lgui(lalt(f19)) │ lsft(lgui(f1))  │ lsft(lgui(f2))  │ lsft(lgui(f3))  │     │
+//    ├─────┼─────┼─────┼─────────────────┼─────┼─────┤                                       ├─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │     │     │     │                 │     │     │                                       │ lgui(lalt(f11)) │ lgui(lalt(f12)) │ lgui(lalt(f13)) │ lgui(lalt(f16)) │ lgui(lalt(f17)) │     │
+//    ├─────┼─────┼─────┼─────────────────┼─────┼─────┼─────┬─────┬─────┐   ┌─────┬─────┬─────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │     │     │     │                 │     │     │     │     │     │   │     │     │     │                 │                 │                 │                 │                 │     │
+//    ├─────┼─────┼─────┼─────────────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │     │     │     │                 │     │     │     │     │     │   │     │     │     │                 │                 │                 │                 │                 │     │
+//    └─────┴─────┴─────┴─────────────────┴─────┘     └─────┴─────┴─────┘   └─────┴─────┴─────┘                 └─────────────────┴─────────────────┴─────────────────┴─────────────────┴─────┘
+  &trans   &trans   &trans   &trans            &trans                                                                                        &trans            &trans            &trans            &trans            &trans
+  &trans   &trans   &trans   &trans            &trans   &trans                                                             &trans            &trans            &trans            &trans            &trans            &trans
+  &trans   &trans   &trans   &kp LG(LA(F10))   &trans   &trans                                                             &kp LG(LA(F18))   &kp LG(LA(F19))   &kp LS(LG(F1))    &kp LS(LG(F2))    &kp LS(LG(F3))    &trans
+  &trans   &trans   &trans   &trans            &trans   &trans                                                             &kp LG(LA(F11))   &kp LG(LA(F12))   &kp LG(LA(F13))   &kp LG(LA(F16))   &kp LG(LA(F17))   &trans
+  &trans   &trans   &trans   &trans            &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &trans            &trans            &trans            &trans            &trans            &trans
+  &trans   &trans   &trans   &trans            &trans            &trans   &trans   &trans       &trans   &trans   &trans                     &trans            &trans            &trans            &trans            &trans
+            >;
+        };
+
+        layer_Letters {
+            bindings = <
+//    ┌─────┬─────┬─────┬────────────────┬─────┐                                                               ┌─────────────────┬─────────────────┬─────┬─────┬─────┐
+//    │     │     │     │                │     │                                                               │                 │                 │     │     │     │
+//    ├─────┼─────┼─────┼────────────────┼─────┼─────┐                                       ┌─────────────────┼─────────────────┼─────────────────┼─────┼─────┼─────┤
+//    │     │     │     │                │     │     │                                       │                 │                 │                 │     │     │     │
+//    ├─────┼─────┼─────┼────────────────┼─────┼─────┤                                       ├─────────────────┼─────────────────┼─────────────────┼─────┼─────┼─────┤
+//    │     │     │     │                │     │     │                                       │ lsft(lgui(f5))  │ lsft(lgui(f6))  │ lsft(lgui(f7))  │     │     │     │
+//    ├─────┼─────┼─────┼────────────────┼─────┼─────┤                                       ├─────────────────┼─────────────────┼─────────────────┼─────┼─────┼─────┤
+//    │     │     │     │ lsft(lgui(f4)) │     │     │                                       │ lsft(lgui(f8))  │ lsft(lgui(f9))  │ lsft(lgui(f10)) │     │     │     │
+//    ├─────┼─────┼─────┼────────────────┼─────┼─────┼─────┬─────┬─────┐   ┌─────┬─────┬─────┼─────────────────┼─────────────────┼─────────────────┼─────┼─────┼─────┤
+//    │     │     │     │                │     │     │     │     │     │   │     │     │     │ lsft(lgui(f11)) │ lsft(lgui(f12)) │ lsft(lgui(f13)) │     │     │     │
+//    ├─────┼─────┼─────┼────────────────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────────────────┼─────────────────┼─────────────────┼─────┼─────┼─────┤
+//    │     │     │     │                │     │     │     │     │     │   │     │     │     │                 │                 │                 │     │     │     │
+//    └─────┴─────┴─────┴────────────────┴─────┘     └─────┴─────┴─────┘   └─────┴─────┴─────┘                 └─────────────────┴─────────────────┴─────┴─────┴─────┘
+  &trans   &trans   &trans   &trans           &trans                                                                                        &trans            &trans            &trans   &trans   &trans
+  &trans   &trans   &trans   &trans           &trans   &trans                                                             &trans            &trans            &trans            &trans   &trans   &trans
+  &trans   &trans   &trans   &trans           &trans   &trans                                                             &kp LS(LG(F5))    &kp LS(LG(F6))    &kp LS(LG(F7))    &trans   &trans   &trans
+  &trans   &trans   &trans   &kp LS(LG(F4))   &trans   &trans                                                             &kp LS(LG(F8))    &kp LS(LG(F9))    &kp LS(LG(F10))   &trans   &trans   &trans
+  &trans   &trans   &trans   &trans           &trans   &trans   &trans   &trans   &trans       &trans   &trans   &trans   &kp LS(LG(F11))   &kp LS(LG(F12))   &kp LS(LG(F13))   &trans   &trans   &trans
+  &trans   &trans   &trans   &trans           &trans            &trans   &trans   &trans       &trans   &trans   &trans                     &trans            &trans            &trans   &trans   &trans
             >;
         };
 
