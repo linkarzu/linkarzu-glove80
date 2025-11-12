@@ -364,7 +364,6 @@
             flavor = "tap-preferred";
             quick-tap-ms = <300>;
             require-prior-idle-ms = <0>;
-            retro-tap;
         };
 
         // Homerow Mod for the right pinky - TailorKey (influenced).
@@ -376,7 +375,6 @@
             flavor = "tap-preferred";
             quick-tap-ms = <300>;
             require-prior-idle-ms = <0>;
-            retro-tap;
         };
 
         // Homerow Mod for the right pinky - TailorKey (influenced).
