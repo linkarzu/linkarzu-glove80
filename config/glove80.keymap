@@ -23,7 +23,7 @@
 
 
 /* Automatically generated layer name #define */
-#define LAYER_Base 0
+#define LAYER_macOS 0
 #define LAYER_Windows 1
 #define LAYER_Lower 2
 #define LAYER_Magic 3
@@ -38,6 +38,9 @@
 #define LAYER_Raycast 12
 #define LAYER_Letters 13
 #define LAYER_Obs 14
+#define LAYER_Bluetooth 15
+#define LAYER_Obspos 16
+#define LAYER_Work 17
 
 /* To deal with the situation where there is no Lower layer, to keep &lower happy */
 #ifndef LAYER_Lower
@@ -275,6 +278,10 @@
 #define POS_RH_C6R5 63
 #define POS_RH_C6R6 79
 
+#define KEYS_L 22 23 24 25 26 27 34 35 36 37 38 39 46 47 48 49 50 51
+#define KEYS_R 28 29 30 31 32 33 40 41 42 43 44 45 58 59 60 61 62 63
+#define THUMBS 69 70 73 74
+
 /* Custom Defined Behaviors */
 / {
     macros {
@@ -348,6 +355,17 @@
 /* Automatically generated macro definitions */
 / {
     macros {
+        third_app: third_app {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings
+                = <&macro_press &kp LGUI>
+                , <&macro_tap &kp TAB &kp TAB>
+                , <&macro_release &kp LGUI>
+                ;
+        };
 
     };
 };
@@ -355,37 +373,54 @@
 /* Automatically generated behavior definitions */
 / {
     behaviors {
-        // Homerow Mod for the left pinky - TailorKey (influenced)
+        // Timeless home-row mods, adapted from the Toucan keymap.
         hrm_l: hrm_l {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <300>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
             quick-tap-ms = <300>;
-            require-prior-idle-ms = <0>;
+            require-prior-idle-ms = <125>;
+            hold-trigger-key-positions = <KEYS_R THUMBS>;
+            hold-trigger-on-release;
         };
 
-        // Homerow Mod for the right pinky - TailorKey (influenced).
         hrm_r: hrm_r {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <300>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
             quick-tap-ms = <300>;
-            require-prior-idle-ms = <0>;
+            require-prior-idle-ms = <125>;
+            hold-trigger-key-positions = <KEYS_L THUMBS>;
+            hold-trigger-on-release;
         };
 
-        // Homerow Mod for the right pinky - TailorKey (influenced).
-        hrm_w: hrm_w {
+        hrm_w_l: hrm_w_l {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>;
             bindings = <&kp>, <&kp>;
-            flavor = "tap-preferred";
-            quick-tap-ms = <200>;
-            require-prior-idle-ms = <0>;
+            flavor = "balanced";
+            quick-tap-ms = <250>;
+            require-prior-idle-ms = <125>;
+            hold-trigger-key-positions = <KEYS_R THUMBS>;
+            hold-trigger-on-release;
+            retro-tap;
+        };
+
+        hrm_w_r: hrm_w_r {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <250>;
+            bindings = <&kp>, <&kp>;
+            flavor = "balanced";
+            quick-tap-ms = <250>;
+            require-prior-idle-ms = <125>;
+            hold-trigger-key-positions = <KEYS_L THUMBS>;
+            hold-trigger-on-release;
             retro-tap;
         };
 
@@ -413,6 +448,14 @@
             bindings = <&kp>, <&kp>;
         };
 
+        h_third_app: h_third_app {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <300>;
+            bindings = <&third_app>, <&kp>;
+        };
+
         /* symbl: symbl { */
         /*     compatible = "zmk,behavior-hold-tap"; */
         /*     #binding-cells = <2>; */
@@ -434,52 +477,53 @@
         compatible = "zmk,keymap";
 
 
-        layer_Base {
+        layer_macOS {
+            display-name = "mac";
             bindings = <
-//    ┌────────────────────────┬────────────────────┬────────────────────────┬──────────────────┬──────────────────────────┐                                                                                                                           ┌─────────────────────────┬───────────────┬────────────────────────────────────┬───────────────┬──────┐
-//    │           f1           │         f2         │           f3           │        f4        │            f5            │                                                                                                                           │           f6            │      f7       │                 f8                 │      f9       │ f10  │
-//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┐                                                                              ┌──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼──────┤
-//    │           `            │         1          │           2            │        3         │            4             │            5            │                                                                              │        6         │            7            │       8       │                 9                  │       0       │  -   │
-//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┤                                                                              ├──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼──────┤
-//    │     &my_mt ent tab     │         Q          │ &my_lt laltYER_Systm W │ &my_mt lalt(E) E │ &my_mt lctl(lgui(f19)) R │ &my_mt lgui(lalt(f1)) T │                                                                              │        Y         │    &my_mt lgui(Z) U     │       I       │ &my_mt lgui(lctl(lalt(lsft(Z)))) O │       P       │  \   │
-//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┤                                                                              ├──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼──────┤
-//    │   lt laltYER_Nav esc   │   &hrm_l lctl A    │     &hrm_l lsft S      │  &hrm_l lalt D   │      &hrm_l lgui F       │    &my_mt lctl(Z) G     │                                                                              │        H         │      &hrm_r rgui J      │ &hrm_r ralt K │           &hrm_r rsft L            │ &hrm_r rctl ; │  '   │
-//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┼──────────────────────┬──────┬────────┐   ┌──────┬──────┬─────────────────────┼──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼──────┤
-//    │          lsft          │ &my_mt lgui(tab) Z │    &my_mt lgui(`) X    │ &my_mt lgui(C) C │     &my_mt lgui(V) V     │ &my_mt lgui(lalt(f8)) B │         lgui         │ lalt │ &lower │   │ rctl │ ralt │        rgui         │ &my_mt lalt(N) N │ &my_mt lgui(lalt(f9)) M │       ,       │ &my_mt lgui(lctl(lalt(lsft(6)))) . │       /       │ rsft │
-//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┼──────────────────────┼──────┼────────┤   ├──────┼──────┼─────────────────────┼──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼──────┤
-//    │ &magic laltYER_Magic 0 │        lctl        │        lgui(`)         │       left       │           rght           │                         │ lt laltYER_Symb bspc │ spc  │  del   │   │ rsft │ spc  │ lt laltYER_Subl ent │                  │          down           │      up       │                 [                  │       ]       │ esc  │
-//    └────────────────────────┴────────────────────┴────────────────────────┴──────────────────┴──────────────────────────┘                         └──────────────────────┴──────┴────────┘   └──────┴──────┴─────────────────────┘                  └─────────────────────────┴───────────────┴────────────────────────────────────┴───────────────┴──────┘
-  &kp F1                 &kp F2             &kp F3                 &kp F4           &kp F5                                                                                                                                                     &kp F6                &kp F7          &kp F8                         &kp F9              &kp F10
-  &kp GRAVE              &kp N1             &kp N2                 &kp N3           &kp N4                 &kp N5                                                                                                             &kp N6           &kp N7                &kp N8          &kp N9                         &kp N0              &kp MINUS
-  &my_mt RET TAB         &kp Q              &my_lt LAYER_Systm W   &my_mt LA(E) E   &my_mt LC(LG(F19)) R   &my_mt LG(LA(F1)) T                                                                                                &kp Y            &my_mt LG(Z) U        &kp I           &my_mt LG(LC(LA(LS(Z)))) O     &kp P               &kp BSLH
-  &lt LAYER_Nav ESC      &hrm_l LCTRL A     &hrm_l LSHFT S         &hrm_l LALT D    &hrm_l LGUI F          &my_mt LC(Z) G                                                                                                     &kp H            &hrm_r RGUI J         &hrm_r RALT K   &hrm_r RSHFT L                 &hrm_r RCTRL SEMI   &kp SQT
-  &kp LSHFT              &my_mt LG(TAB) Z   &my_mt LG(GRAVE) X     &my_mt LG(C) C   &my_mt LG(V) V         &my_mt LG(LA(F8)) B   &kp LGUI              &kp LALT    &lower        &kp RCTRL   &kp RALT    &kp RGUI             &my_mt LA(N) N   &my_mt LG(LA(F9)) M   &kp COMMA       &my_mt LG(LC(LA(LS(6)))) DOT   &kp FSLH            &kp RSHFT
-  &magic LAYER_Magic 0   &kp LCTRL          &kp LG(GRAVE)          &kp LEFT         &kp RIGHT                                    &lt LAYER_Symb BSPC   &kp SPACE   &kp DEL       &kp RSHFT   &kp SPACE   &lt LAYER_Subl RET                    &kp DOWN              &kp UP          &kp LBKT                       &kp RBKT            &kp ESC
+//    ┌────────────────────────┬────────────────────┬────────────────────────┬──────────────────┬──────────────────────────┐                                                                                                                     ┌─────────────────────────┬───────────────┬────────────────────────────────────┬───────────────┬─────┐
+//    │                        │                    │                        │                  │                          │                                                                                                                     │                         │               │                                    │               │     │
+//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┐                                                                        ┌──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼─────┤
+//    │                        │                    │                        │                  │                          │                         │                                                                        │                  │                         │               │                                    │               │     │
+//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┤                                                                        ├──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼─────┤
+//    │     &my_mt ent tab     │         Q          │ &my_lt laltYER_Systm W │ &my_mt lalt(E) E │ &my_mt lctl(lgui(f19)) R │ &my_mt lgui(lalt(f1)) T │                                                                        │        Y         │    &my_mt lgui(Z) U     │       I       │ &my_mt lgui(lctl(lalt(lsft(Z)))) O │       P       │  \  │
+//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┤                                                                        ├──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼─────┤
+//    │   lt laltYER_Nav esc   │   &hrm_l lctl A    │     &hrm_l lsft S      │  &hrm_l lalt D   │      &hrm_l lgui F       │    &my_mt lctl(Z) G     │                                                                        │ &h_third_app 0 H │      &hrm_r rgui J      │ &hrm_r ralt K │           &hrm_r rsft L            │ &hrm_r rctl ; │  '  │
+//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┼──────────────────────┬─────┬─────┐   ┌─────┬─────┬─────────────────────┼──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼─────┤
+//    │                        │ &my_mt lgui(tab) Z │    &my_mt lgui(`) X    │ &my_mt lgui(C) C │     &my_mt lgui(V) V     │ &my_mt lgui(lalt(f8)) B │                      │     │     │   │     │     │                     │ &my_mt lalt(N) N │ &my_mt lgui(lalt(f9)) M │       ,       │ &my_mt lgui(lctl(lalt(lsft(6)))) . │       /       │     │
+//    ├────────────────────────┼────────────────────┼────────────────────────┼──────────────────┼──────────────────────────┼─────────────────────────┼──────────────────────┼─────┼─────┤   ├─────┼─────┼─────────────────────┼──────────────────┼─────────────────────────┼───────────────┼────────────────────────────────────┼───────────────┼─────┤
+//    │ &magic laltYER_Magic 0 │                    │                        │                  │                          │                         │ lt laltYER_Symb bspc │ spc │     │   │     │ spc │ lt laltYER_Subl ent │                  │                         │               │                                    │               │     │
+//    └────────────────────────┴────────────────────┴────────────────────────┴──────────────────┴──────────────────────────┘                         └──────────────────────┴─────┴─────┘   └─────┴─────┴─────────────────────┘                  └─────────────────────────┴───────────────┴────────────────────────────────────┴───────────────┴─────┘
+  &none                  &none              &none                  &none            &none                                                                                                                                                  &none                 &none           &none                          &none               &none
+  &none                  &none              &none                  &none            &none                  &none                                                                                                        &none              &none                 &none           &none                          &none               &none
+  &my_mt RET TAB         &kp Q              &my_lt LAYER_Systm W   &my_mt LA(E) E   &my_mt LC(LG(F19)) R   &my_mt LG(LA(F1)) T                                                                                          &kp Y              &my_mt LG(Z) U        &kp I           &my_mt LG(LC(LA(LS(Z)))) O     &kp P               &kp BSLH
+  &lt LAYER_Nav ESC      &hrm_l LCTRL A     &hrm_l LSHFT S         &hrm_l LALT D    &hrm_l LGUI F          &my_mt LC(Z) G                                                                                               &h_third_app 0 H   &hrm_r RGUI J         &hrm_r RALT K   &hrm_r RSHFT L                 &hrm_r RCTRL SEMI   &kp SQT
+  &none                  &my_mt LG(TAB) Z   &my_mt LG(GRAVE) X     &my_mt LG(C) C   &my_mt LG(V) V         &my_mt LG(LA(F8)) B   &none                 &none       &none       &none   &none       &none                &my_mt LA(N) N     &my_mt LG(LA(F9)) M   &kp COMMA       &my_mt LG(LC(LA(LS(6)))) DOT   &kp FSLH            &none
+  &magic LAYER_Magic 0   &none              &none                  &none            &none                                        &lt LAYER_Symb BSPC   &kp SPACE   &none       &none   &kp SPACE   &lt LAYER_Subl RET                      &none                 &none           &none                          &none               &none
             >;
         };
 
 
         layer_Windows {
             bindings = <
-//    ┌────────────────────────┬────────────────────────────────┬────────────────────────────────┬───────────────────┬───────────────────────────┐                                                                                                             ┌──────────────────┬───────────────┬───────────────┬───────────────┬──────┐
-//    │           f1           │               f2               │               f3               │        f4         │            f5             │                                                                                                             │        f6        │      f7       │      f8       │      f9       │ f10  │
-//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┐                                                                              ┌───┼──────────────────┼───────────────┼───────────────┼───────────────┼──────┤
-//    │           `            │               1                │               2                │         3         │             4             │            5             │                                                                              │ 6 │        7         │       8       │       9       │       0       │  -   │
-//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┤                                                                              ├───┼──────────────────┼───────────────┼───────────────┼───────────────┼──────┤
-//    │    &my_mtw ent tab     │               Q                │       lt laltYER_Systm W       │         E         │ &my_mtw lctl(lgui(f19)) R │ &my_mtw lgui(lalt(f1)) T │                                                                              │ Y │ &my_mt lctl(Z) U │       I       │       O       │       P       │  \   │
-//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┤                                                                              ├───┼──────────────────┼───────────────┼───────────────┼───────────────┼──────┤
-//    │   lt laltYER_Nav esc   │         &hrm_w lctl A          │         &hrm_w lsft S          │   &hrm_w lgui D   │       &hrm_w lalt F       │            G             │                                                                              │ H │  &hrm_w ralt J   │ &hrm_w rgui K │ &hrm_w rsft L │ &hrm_w rctl ; │  '   │
-//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┼──────────────────────┬──────┬────────┐   ┌──────┬──────┬─────────────────────┼───┼──────────────────┼───────────────┼───────────────┼───────────────┼──────┤
-//    │          lsft          │ &my_mtw lsft(lalt(lgui(f6))) Z │ &my_mtw lsft(lalt(lgui(f7))) X │ &my_mtw lctl(C) C │     &my_mtw lctl(V) V     │            B             │         lgui         │ lalt │ &lower │   │ rctl │ ralt │        rgui         │ N │        M         │       ,       │       .       │       /       │ rsft │
-//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┼──────────────────────┼──────┼────────┤   ├──────┼──────┼─────────────────────┼───┼──────────────────┼───────────────┼───────────────┼───────────────┼──────┤
-//    │ &magic laltYER_Magic 0 │              lctl              │            lgui(`)             │       left        │           rght            │                          │ lt laltYER_Symb bspc │ spc  │  del   │   │ rsft │ spc  │ lt laltYER_Subl ent │   │       down       │      up       │       [       │       ]       │ esc  │
-//    └────────────────────────┴────────────────────────────────┴────────────────────────────────┴───────────────────┴───────────────────────────┘                          └──────────────────────┴──────┴────────┘   └──────┴──────┴─────────────────────┘   └──────────────────┴───────────────┴───────────────┴───────────────┴──────┘
-  &kp F1                 &kp F2                     &kp F3                     &kp F4            &kp F5                                                                                                                                               &kp F6           &kp F7          &kp F8           &kp F9              &kp F10
-  &kp GRAVE              &kp N1                     &kp N2                     &kp N3            &kp N4                  &kp N5                                                                                                              &kp N6   &kp N7           &kp N8          &kp N9           &kp N0              &kp MINUS
-  &my_mtw RET TAB        &kp Q                      &lt LAYER_Systm W          &kp E             &my_mtw LC(LG(F19)) R   &my_mtw LG(LA(F1)) T                                                                                                &kp Y    &my_mt LC(Z) U   &kp I           &kp O            &kp P               &kp BSLH
-  &lt LAYER_Nav ESC      &hrm_w LCTRL A             &hrm_w LSHFT S             &hrm_w LGUI D     &hrm_w LALT F           &kp G                                                                                                               &kp H    &hrm_w RALT J    &hrm_w RGUI K   &hrm_w RSHFT L   &hrm_w RCTRL SEMI   &kp SQT
-  &kp LSHFT              &my_mtw LS(LA(LG(F6))) Z   &my_mtw LS(LA(LG(F7))) X   &my_mtw LC(C) C   &my_mtw LC(V) V         &kp B                  &kp LGUI              &kp LALT    &lower        &kp RCTRL   &kp RALT    &kp RGUI             &kp N    &kp M            &kp COMMA       &kp DOT          &kp FSLH            &kp RSHFT
-  &magic LAYER_Magic 0   &kp LCTRL                  &kp LG(GRAVE)              &kp LEFT          &kp RIGHT                                      &lt LAYER_Symb BSPC   &kp SPACE   &kp DEL       &kp RSHFT   &kp SPACE   &lt LAYER_Subl RET            &kp DOWN         &kp UP          &kp LBKT         &kp RBKT            &kp ESC
+//    ┌────────────────────────┬────────────────────────────────┬────────────────────────────────┬───────────────────┬───────────────────────────┐                                                                                                         ┌──────────────────┬─────────────────┬─────────────────┬─────────────────┬─────┐
+//    │                        │                                │                                │                   │                           │                                                                                                         │                  │                 │                 │                 │     │
+//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┐                                                                        ┌─────┼──────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │                        │                                │                                │                   │                           │                          │                                                                        │     │                  │                 │                 │                 │     │
+//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┤                                                                        ├─────┼──────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │    &my_mtw ent tab     │               Q                │       lt laltYER_Systm W       │         E         │ &my_mtw lctl(lgui(f19)) R │ &my_mtw lgui(lalt(f1)) T │                                                                        │  Y  │ &my_mt lctl(Z) U │        I        │        O        │        P        │  \  │
+//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┤                                                                        ├─────┼──────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │   lt laltYER_Nav esc   │        &hrm_w_l lctl A         │        &hrm_w_l lsft S         │  &hrm_w_l lgui D  │      &hrm_w_l lalt F      │            G             │                                                                        │  H  │ &hrm_w_r ralt J  │ &hrm_w_r rgui K │ &hrm_w_r rsft L │ &hrm_w_r rctl ; │  '  │
+//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┼──────────────────────┬─────┬─────┐   ┌─────┬─────┬─────────────────────┼─────┼──────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │                        │ &my_mtw lsft(lalt(lgui(f6))) Z │ &my_mtw lsft(lalt(lgui(f7))) X │ &my_mtw lctl(C) C │     &my_mtw lctl(V) V     │            B             │                      │     │     │   │     │     │                     │  N  │        M         │        ,        │        .        │        /        │     │
+//    ├────────────────────────┼────────────────────────────────┼────────────────────────────────┼───────────────────┼───────────────────────────┼──────────────────────────┼──────────────────────┼─────┼─────┤   ├─────┼─────┼─────────────────────┼─────┼──────────────────┼─────────────────┼─────────────────┼─────────────────┼─────┤
+//    │ &magic laltYER_Magic 0 │                                │                                │                   │                           │                          │ lt laltYER_Symb bspc │ spc │     │   │     │ spc │ lt laltYER_Subl ent │     │                  │                 │                 │                 │     │
+//    └────────────────────────┴────────────────────────────────┴────────────────────────────────┴───────────────────┴───────────────────────────┘                          └──────────────────────┴─────┴─────┘   └─────┴─────┴─────────────────────┘     └──────────────────┴─────────────────┴─────────────────┴─────────────────┴─────┘
+  &none                  &none                      &none                      &none             &none                                                                                                                                         &none             &none             &none              &none                 &none
+  &none                  &none                      &none                      &none             &none                   &none                                                                                                         &none   &none             &none             &none              &none                 &none
+  &my_mtw RET TAB        &kp Q                      &lt LAYER_Systm W          &kp E             &my_mtw LC(LG(F19)) R   &my_mtw LG(LA(F1)) T                                                                                          &kp Y   &my_mt LC(Z) U    &kp I             &kp O              &kp P                 &kp BSLH
+  &lt LAYER_Nav ESC      &hrm_w_l LCTRL A           &hrm_w_l LSHFT S           &hrm_w_l LGUI D   &hrm_w_l LALT F         &kp G                                                                                                         &kp H   &hrm_w_r RALT J   &hrm_w_r RGUI K   &hrm_w_r RSHFT L   &hrm_w_r RCTRL SEMI   &kp SQT
+  &none                  &my_mtw LS(LA(LG(F6))) Z   &my_mtw LS(LA(LG(F7))) X   &my_mtw LC(C) C   &my_mtw LC(V) V         &kp B                  &none                 &none       &none       &none   &none       &none                &kp N   &kp M             &kp COMMA         &kp DOT            &kp FSLH              &none
+  &magic LAYER_Magic 0   &none                      &none                      &none             &none                                          &lt LAYER_Symb BSPC   &kp SPACE   &none       &none   &kp SPACE   &lt LAYER_Subl RET           &none             &none             &none              &none                 &none
             >;
         };
 
@@ -557,25 +601,25 @@
 
         layer_Nav {
             bindings = <
-//    ┌─────────────────────────────┬───────────────────────────┬───────────────────────────┬───────────────────────────┬─────────┐                                                                                      ┌──────────────────┬────────────────┬──────────────────┬───────────────────────────┬─────┐
-//    │                             │                           │                           │                           │         │                                                                                      │                  │                │                  │                           │     │
-//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┐                                       ┌──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
-//    │                             │                           │                           │                           │         │                           │                                       │                  │                  │                │                  │                           │     │
-//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┤                                       ├──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
-//    │ lgui(lctl(lalt(lsft(tab)))) │ lgui(lctl(lalt(lsft(0)))) │ lgui(lctl(lalt(lsft(W)))) │ lgui(lctl(lalt(lsft(D)))) │         │ lgui(lctl(lalt(lsft(T)))) │                                       │ lalt(lsft(left)) │ lalt(lsft(down)) │ lalt(lsft(up)) │ lalt(lsft(rght)) │                           │     │
-//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┤                                       ├──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
-//    │                             │ lgui(lctl(lalt(lsft(=)))) │ lgui(lctl(lalt(lsft(9)))) │          lgui([)          │ lgui(]) │ lgui(lctl(lalt(lsft(G)))) │                                       │       left       │       down       │       up       │       rght       │ lgui(lctl(lalt(lsft(;)))) │     │
-//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┼─────┬─────┬─────┐   ┌─────┬─────┬─────┼──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
-//    │                             │                           │                           │                           │         │ lgui(lctl(lalt(lsft(B)))) │     │     │     │   │     │     │     │                  │                  │                │                  │                           │     │
-//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
-//    │                             │                           │                           │                           │         │                           │     │     │     │   │     │     │     │                  │                  │                │                  │                           │     │
-//    └─────────────────────────────┴───────────────────────────┴───────────────────────────┴───────────────────────────┴─────────┘                           └─────┴─────┴─────┘   └─────┴─────┴─────┘                  └──────────────────┴────────────────┴──────────────────┴───────────────────────────┴─────┘
-  &trans                    &trans                      &trans                   &trans                  &trans                                                                                                              &trans             &trans           &trans              &trans                     &trans
-  &trans                    &trans                      &trans                   &trans                  &trans         &trans                                                                            &trans             &trans             &trans           &trans              &trans                     &trans
-  &kp LG(LC(LA(LS(TAB))))   &kp LG(LC(LA(LS(N0))))      &kp LG(LC(LA(LS(W))))    &kp LG(LC(LA(LS(D))))   &trans         &kp LG(LC(LA(LS(T))))                                                             &kp LA(LS(LEFT))   &kp LA(LS(DOWN))   &kp LA(LS(UP))   &kp LA(LS(RIGHT))   &trans                     &trans
-  &trans                    &kp LG(LC(LA(LS(EQUAL))))   &kp LG(LC(LA(LS(N9))))   &kp LG(LBKT)            &kp LG(RBKT)   &kp LG(LC(LA(LS(G))))                                                             &kp LEFT           &kp DOWN           &kp UP           &kp RIGHT           &kp LG(LC(LA(LS(SEMI))))   &trans
-  &trans                    &trans                      &trans                   &trans                  &trans         &kp LG(LC(LA(LS(B))))   &trans   &trans   &trans       &trans   &trans   &trans   &trans             &trans             &trans           &trans              &trans                     &trans
-  &trans                    &trans                      &trans                   &trans                  &trans                                 &trans   &trans   &trans       &trans   &trans   &trans                      &trans             &trans           &trans              &trans                     &trans
+//    ┌─────────────────────────────┬───────────────────────────┬───────────────────────────┬───────────────────────────┬─────────┐                                                                                       ┌──────────────────┬────────────────┬──────────────────┬───────────────────────────┬─────┐
+//    │                             │                           │                           │                           │         │                                                                                       │                  │                │                  │                           │     │
+//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┐                                        ┌──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
+//    │                             │                           │                           │                           │         │                           │                                        │                  │                  │                │                  │                           │     │
+//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┤                                        ├──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
+//    │ lgui(lctl(lalt(lsft(tab)))) │ lgui(lctl(lalt(lsft(0)))) │ lgui(lctl(lalt(lsft(W)))) │ lgui(lctl(lalt(lsft(D)))) │         │ lgui(lctl(lalt(lsft(T)))) │                                        │ lalt(lsft(left)) │ lalt(lsft(down)) │ lalt(lsft(up)) │ lalt(lsft(rght)) │                           │     │
+//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┤                                        ├──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
+//    │                             │ lgui(lctl(lalt(lsft(=)))) │ lgui(lctl(lalt(lsft(9)))) │          lgui([)          │ lgui(]) │ lgui(lctl(lalt(lsft(G)))) │                                        │       left       │       down       │       up       │       rght       │ lgui(lctl(lalt(lsft(;)))) │     │
+//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┼─────┬─────┬─────┐   ┌─────┬─────┬──────┼──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
+//    │                             │                           │                           │                           │         │ lgui(lctl(lalt(lsft(B)))) │     │     │     │   │     │     │      │                  │                  │                │                  │                           │     │
+//    ├─────────────────────────────┼───────────────────────────┼───────────────────────────┼───────────────────────────┼─────────┼───────────────────────────┼─────┼─────┼─────┤   ├─────┼─────┼──────┼──────────────────┼──────────────────┼────────────────┼──────────────────┼───────────────────────────┼─────┤
+//    │                             │                           │                           │                           │         │                           │     │     │     │   │     │     │ caps │                  │                  │                │                  │                           │     │
+//    └─────────────────────────────┴───────────────────────────┴───────────────────────────┴───────────────────────────┴─────────┘                           └─────┴─────┴─────┘   └─────┴─────┴──────┘                  └──────────────────┴────────────────┴──────────────────┴───────────────────────────┴─────┘
+  &trans                    &trans                      &trans                   &trans                  &trans                                                                                                                &trans             &trans           &trans              &trans                     &trans
+  &trans                    &trans                      &trans                   &trans                  &trans         &trans                                                                              &trans             &trans             &trans           &trans              &trans                     &trans
+  &kp LG(LC(LA(LS(TAB))))   &kp LG(LC(LA(LS(N0))))      &kp LG(LC(LA(LS(W))))    &kp LG(LC(LA(LS(D))))   &trans         &kp LG(LC(LA(LS(T))))                                                               &kp LA(LS(LEFT))   &kp LA(LS(DOWN))   &kp LA(LS(UP))   &kp LA(LS(RIGHT))   &trans                     &trans
+  &trans                    &kp LG(LC(LA(LS(EQUAL))))   &kp LG(LC(LA(LS(N9))))   &kp LG(LBKT)            &kp LG(RBKT)   &kp LG(LC(LA(LS(G))))                                                               &kp LEFT           &kp DOWN           &kp UP           &kp RIGHT           &kp LG(LC(LA(LS(SEMI))))   &trans
+  &trans                    &trans                      &trans                   &trans                  &trans         &kp LG(LC(LA(LS(B))))   &trans   &trans   &trans       &trans   &trans   &trans     &trans             &trans             &trans           &trans              &trans                     &trans
+  &trans                    &trans                      &trans                   &trans                  &trans                                 &trans   &trans   &trans       &trans   &trans   &kp CAPS                      &trans             &trans           &trans              &trans                     &trans
             >;
         };
 
@@ -605,25 +649,25 @@
 
         layer_Subl {
             bindings = <
-//    ┌─────┬─────┬────────────────────┬─────┬────────────────────┐                                                                            ┌─────┬─────┬────────────────┬─────┬─────┐
-//    │     │     │                    │     │                    │                                                                            │     │     │                │     │     │
-//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┐                                                   ┌─────┼─────┼─────┼────────────────┼─────┼─────┤
-//    │     │     │                    │     │                    │                  │                                                   │     │     │     │                │     │     │
-//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┤                                                   ├─────┼─────┼─────┼────────────────┼─────┼─────┤
-//    │     │     │                    │     │ mo laltYER_Raycast │ mo laltYER_Sesss │                                                   │     │     │     │ mo laltYER_Obs │     │     │
-//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┤                                                   ├─────┼─────┼─────┼────────────────┼─────┼─────┤
-//    │     │     │ mo laltYER_Letters │     │                    │                  │                                                   │     │     │     │                │     │     │
-//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┼─────────────────┬─────┬─────┐   ┌─────┬─────┬─────┼─────┼─────┼─────┼────────────────┼─────┼─────┤
-//    │     │     │                    │     │                    │                  │                 │     │     │   │     │     │     │     │     │     │                │     │     │
-//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────┼─────────────────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼────────────────┼─────┼─────┤
-//    │     │     │                    │     │                    │                  │ mo laltYER_Apps │     │     │   │     │     │     │     │     │     │                │     │     │
-//    └─────┴─────┴────────────────────┴─────┴────────────────────┘                  └─────────────────┴─────┴─────┘   └─────┴─────┴─────┘     └─────┴─────┴────────────────┴─────┴─────┘
-  &trans   &trans   &trans              &trans   &trans                                                                                                           &trans   &trans   &trans          &trans   &trans
-  &trans   &trans   &trans              &trans   &trans              &trans                                                                              &trans   &trans   &trans   &trans          &trans   &trans
-  &trans   &trans   &trans              &trans   &mo LAYER_Raycast   &mo LAYER_Sesss                                                                     &trans   &trans   &trans   &mo LAYER_Obs   &trans   &trans
-  &trans   &trans   &mo LAYER_Letters   &trans   &trans              &trans                                                                              &trans   &trans   &trans   &trans          &trans   &trans
-  &trans   &trans   &trans              &trans   &trans              &trans            &trans           &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans          &trans   &trans
-  &trans   &trans   &trans              &trans   &trans                                &mo LAYER_Apps   &trans   &trans       &trans   &trans   &trans            &trans   &trans   &trans          &trans   &trans
+//    ┌─────┬─────┬────────────────────┬─────┬────────────────────┐                                                                                ┌─────┬─────┬────────────────┬─────┬─────┐
+//    │     │     │                    │     │                    │                                                                                │     │     │                │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────────┐                                                   ┌─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │                    │     │                    │                      │                                                   │     │     │     │                │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────────┤                                                   ├─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │  mo laltYER_Work   │     │ mo laltYER_Raycast │   mo laltYER_Sesss   │                                                   │     │     │     │ mo laltYER_Obs │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────────┤                                                   ├─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │ mo laltYER_Letters │     │                    │                      │                                                   │     │     │     │                │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────────┼─────────────────┬─────┬─────┐   ┌─────┬─────┬─────┼─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │                    │     │                    │ mo laltYER_Bluetooth │                 │     │     │   │     │     │     │     │     │     │                │     │     │
+//    ├─────┼─────┼────────────────────┼─────┼────────────────────┼──────────────────────┼─────────────────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼────────────────┼─────┼─────┤
+//    │     │     │                    │     │                    │                      │ mo laltYER_Apps │     │     │   │     │     │     │     │     │     │                │     │     │
+//    └─────┴─────┴────────────────────┴─────┴────────────────────┘                      └─────────────────┴─────┴─────┘   └─────┴─────┴─────┘     └─────┴─────┴────────────────┴─────┴─────┘
+  &trans   &trans   &trans              &trans   &trans                                                                                                               &trans   &trans   &trans          &trans   &trans
+  &trans   &trans   &trans              &trans   &trans              &trans                                                                                  &trans   &trans   &trans   &trans          &trans   &trans
+  &trans   &trans   &mo LAYER_Work      &trans   &mo LAYER_Raycast   &mo LAYER_Sesss                                                                         &trans   &trans   &trans   &mo LAYER_Obs   &trans   &trans
+  &trans   &trans   &mo LAYER_Letters   &trans   &trans              &trans                                                                                  &trans   &trans   &trans   &trans          &trans   &trans
+  &trans   &trans   &trans              &trans   &trans              &mo LAYER_Bluetooth   &trans           &trans   &trans       &trans   &trans   &trans   &trans   &trans   &trans   &trans          &trans   &trans
+  &trans   &trans   &trans              &trans   &trans                                    &mo LAYER_Apps   &trans   &trans       &trans   &trans   &trans            &trans   &trans   &trans          &trans   &trans
             >;
         };
 
@@ -779,7 +823,7 @@
 //    ├─────┼─────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┐                                       ┌──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼─────┤
 //    │     │                 │                      │                      │                      │                      │                                       │                      │                      │                      │                      │                      │     │
 //    ├─────┼─────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┤                                       ├──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼─────┤
-//    │     │ lsft(lalt(f1))  │    lsft(lalt(f2))    │    lsft(lalt(f3))    │    lsft(lalt(f4))    │    lsft(lalt(f5))    │                                       │    lsft(lalt(f6))    │    lsft(lalt(f7))    │    lsft(lalt(f8))    │    lsft(lalt(f9))    │   lsft(lalt(f10))    │     │
+//    │     │ lsft(lalt(f1))  │    lsft(lalt(f2))    │    lsft(lalt(f3))    │    lsft(lalt(f4))    │    lsft(lalt(f5))    │                                       │    lsft(lalt(f6))    │    lsft(lalt(f7))    │    lsft(lalt(f8))    │                      │  mo laltYER_Obspos   │     │
 //    ├─────┼─────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┤                                       ├──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼─────┤
 //    │     │ lsft(lalt(f11)) │   lsft(lalt(f12))    │   lsft(lalt(f13))    │   lsft(lalt(f16))    │   lsft(lalt(f17))    │                                       │   lsft(lalt(f18))    │   lsft(lalt(f19))    │   lsft(lgui(f16))    │   lsft(lgui(f17))    │   lsft(lgui(f18))    │     │
 //    ├─────┼─────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼─────┬─────┬─────┐   ┌─────┬─────┬─────┼──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼──────────────────────┼─────┤
@@ -789,10 +833,82 @@
 //    └─────┴─────────────────┴──────────────────────┴──────────────────────┴──────────────────────┘                      └─────┴─────┴─────┘   └─────┴─────┴─────┘                      └──────────────────────┴──────────────────────┴──────────────────────┴──────────────────────┴─────┘
   &trans   &trans            &trans               &trans               &trans                                                                                                                   &trans               &trans               &trans               &trans               &trans
   &trans   &trans            &trans               &trans               &trans               &trans                                                                         &trans               &trans               &trans               &trans               &trans               &trans
-  &trans   &kp LS(LA(F1))    &kp LS(LA(F2))       &kp LS(LA(F3))       &kp LS(LA(F4))       &kp LS(LA(F5))                                                                 &kp LS(LA(F6))       &kp LS(LA(F7))       &kp LS(LA(F8))       &kp LS(LA(F9))       &kp LS(LA(F10))      &trans
+  &trans   &kp LS(LA(F1))    &kp LS(LA(F2))       &kp LS(LA(F3))       &kp LS(LA(F4))       &kp LS(LA(F5))                                                                 &kp LS(LA(F6))       &kp LS(LA(F7))       &kp LS(LA(F8))       &trans               &mo LAYER_Obspos     &trans
   &trans   &kp LS(LA(F11))   &kp LS(LA(F12))      &kp LS(LA(F13))      &kp LS(LA(F16))      &kp LS(LA(F17))                                                                &kp LS(LA(F18))      &kp LS(LA(F19))      &kp LS(LG(F16))      &kp LS(LG(F17))      &kp LS(LG(F18))      &trans
   &trans   &kp LS(LG(F19))   &kp LS(LA(LC(F1)))   &kp LS(LA(LC(F2)))   &kp LS(LA(LC(F3)))   &kp LS(LA(LC(F4)))   &trans   &trans   &trans       &trans   &trans   &trans   &kp LS(LA(LC(F5)))   &kp LS(LA(LC(F6)))   &kp LS(LA(LC(F7)))   &kp LS(LA(LC(F8)))   &kp LS(LA(LC(F9)))   &trans
   &trans   &trans            &trans               &trans               &trans                                    &trans   &trans   &trans       &trans   &trans   &trans                        &trans               &trans               &trans               &trans               &trans
+            >;
+        };
+
+        layer_Bluetooth {
+            bindings = <
+//    ┌─────┬─────┬─────┬─────┬─────┐                                                      ┌──────────┬──────────┬──────────┬──────────┬──────────┐
+//    │     │     │     │     │     │                                                      │          │          │          │          │          │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┐                                       ┌────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+//    │     │     │     │     │     │     │                                       │        │          │          │          │          │          │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┤                                       ├────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+//    │     │     │     │     │     │     │                                       │        │   to 0   │   to 1   │          │          │          │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┤                                       ├────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+//    │     │     │     │     │     │     │                                       │ bt_clr │ bt_sel 0 │ bt_sel 1 │ bt_sel 2 │ bt_sel 3 │ bt_sel 4 │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┼─────┬─────┬─────┐   ┌─────┬─────┬─────┼────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+//    │     │     │     │     │     │     │     │     │     │   │     │     │     │        │          │          │          │          │          │
+//    ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼────────┼──────────┼──────────┼──────────┼──────────┼──────────┤
+//    │     │     │     │     │     │     │     │     │     │   │     │     │     │        │          │          │          │          │          │
+//    └─────┴─────┴─────┴─────┴─────┘     └─────┴─────┴─────┘   └─────┴─────┴─────┘        └──────────┴──────────┴──────────┴──────────┴──────────┘
+  &trans   &trans   &trans   &trans   &trans                                                                                 &trans         &trans         &trans         &trans         &trans
+  &trans   &trans   &trans   &trans   &trans   &trans                                                           &trans       &trans         &trans         &trans         &trans         &trans
+  &trans   &trans   &trans   &trans   &trans   &trans                                                           &trans       &to 0          &to 1          &trans         &trans         &trans
+  &trans   &trans   &trans   &trans   &trans   &trans                                                           &bt BT_CLR   &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4
+  &trans   &trans   &trans   &trans   &trans   &trans   &none    &none    &none       &none   &none    &none    &trans       &trans         &trans         &trans         &trans         &trans
+  &trans   &trans   &trans   &trans   &trans            &trans   &trans   &none       &none   &trans   &trans                &trans         &trans         &trans         &trans         &trans
+            >;
+        };
+
+        layer_Obspos {
+            bindings = <
+//    ┌─────┬────────────────┬─────────────────┬──────────────────────┬──────────────────────┐                                                   ┌─────┬─────┬─────┬─────┬─────┐
+//    │     │                │                 │                      │                      │                                                   │     │     │     │     │     │
+//    ├─────┼────────────────┼─────────────────┼──────────────────────┼──────────────────────┼─────┐                                       ┌─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │                │                 │                      │                      │     │                                       │     │     │     │     │     │     │
+//    ├─────┼────────────────┼─────────────────┼──────────────────────┼──────────────────────┼─────┤                                       ├─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │                │                 │                      │                      │     │                                       │     │     │     │     │     │     │
+//    ├─────┼────────────────┼─────────────────┼──────────────────────┼──────────────────────┼─────┤                                       ├─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │ lsft(lalt(f9)) │ lsft(lalt(f10)) │ lsft(lalt(lgui(f8))) │ lsft(lalt(lgui(f9))) │     │                                       │     │     │     │     │     │     │
+//    ├─────┼────────────────┼─────────────────┼──────────────────────┼──────────────────────┼─────┼─────┬─────┬─────┐   ┌─────┬─────┬─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │                │                 │                      │                      │     │     │     │     │   │     │     │     │     │     │     │     │     │     │
+//    ├─────┼────────────────┼─────────────────┼──────────────────────┼──────────────────────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┼─────┤
+//    │     │                │                 │                      │                      │     │     │     │     │   │     │     │     │     │     │     │     │     │     │
+//    └─────┴────────────────┴─────────────────┴──────────────────────┴──────────────────────┘     └─────┴─────┴─────┘   └─────┴─────┴─────┘     └─────┴─────┴─────┴─────┴─────┘
+  &trans   &trans           &trans            &trans               &trans                                                                                         &trans   &trans   &trans   &trans   &trans
+  &trans   &trans           &trans            &trans               &trans               &trans                                                           &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans           &trans            &trans               &trans               &trans                                                           &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &kp LS(LA(F9))   &kp LS(LA(F10))   &kp LS(LA(LG(F8)))   &kp LS(LA(LG(F9)))   &trans                                                           &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans           &trans            &trans               &trans               &trans   &none    &none    &none       &none   &none    &none    &trans   &trans   &trans   &trans   &trans   &trans
+  &trans   &trans           &trans            &trans               &trans                        &trans   &trans   &none       &none   &trans   &trans            &trans   &trans   &trans   &trans   &trans
+            >;
+        };
+
+        layer_Work {
+            bindings = <
+//    ┌─────┬─────┬─────┬─────┬───────────────────────┐                                                   ┌───────────────────────┬───────────────────────┬───────────────────────┬───────────────────────┬─────┐
+//    │     │     │     │     │                       │                                                   │                       │                       │                       │                       │     │
+//    ├─────┼─────┼─────┼─────┼───────────────────────┼─────┐                                       ┌─────┼───────────────────────┼───────────────────────┼───────────────────────┼───────────────────────┼─────┤
+//    │     │     │     │     │                       │     │                                       │     │                       │                       │                       │                       │     │
+//    ├─────┼─────┼─────┼─────┼───────────────────────┼─────┤                                       ├─────┼───────────────────────┼───────────────────────┼───────────────────────┼───────────────────────┼─────┤
+//    │     │     │     │     │                       │     │                                       │     │                       │                       │ lsft(lalt(lgui(f12))) │                       │     │
+//    ├─────┼─────┼─────┼─────┼───────────────────────┼─────┤                                       ├─────┼───────────────────────┼───────────────────────┼───────────────────────┼───────────────────────┼─────┤
+//    │     │     │     │     │ lsft(lalt(lgui(f18))) │     │                                       │     │ lsft(lalt(lgui(f16))) │ lsft(lalt(lgui(f11))) │                       │ lsft(lalt(lgui(f17))) │     │
+//    ├─────┼─────┼─────┼─────┼───────────────────────┼─────┼─────┬─────┬─────┐   ┌─────┬─────┬─────┼─────┼───────────────────────┼───────────────────────┼───────────────────────┼───────────────────────┼─────┤
+//    │     │     │     │     │                       │     │     │     │     │   │     │     │     │     │ lsft(lalt(lgui(f13))) │                       │                       │                       │     │
+//    ├─────┼─────┼─────┼─────┼───────────────────────┼─────┼─────┼─────┼─────┤   ├─────┼─────┼─────┼─────┼───────────────────────┼───────────────────────┼───────────────────────┼───────────────────────┼─────┤
+//    │     │     │     │     │                       │     │     │     │     │   │     │     │     │     │                       │                       │                       │                       │     │
+//    └─────┴─────┴─────┴─────┴───────────────────────┘     └─────┴─────┴─────┘   └─────┴─────┴─────┘     └───────────────────────┴───────────────────────┴───────────────────────┴───────────────────────┴─────┘
+  &trans   &trans   &trans   &trans   &trans                                                                                          &trans                &trans                &trans                &trans                &trans
+  &trans   &trans   &trans   &trans   &trans                &trans                                                           &trans   &trans                &trans                &trans                &trans                &trans
+  &trans   &trans   &trans   &trans   &trans                &trans                                                           &trans   &trans                &trans                &kp LS(LA(LG(F12)))   &trans                &trans
+  &trans   &trans   &trans   &trans   &kp LS(LA(LG(F18)))   &trans                                                           &trans   &kp LS(LA(LG(F16)))   &kp LS(LA(LG(F11)))   &trans                &kp LS(LA(LG(F17)))   &trans
+  &trans   &trans   &trans   &trans   &trans                &trans   &none    &none    &none       &none   &none    &none    &trans   &kp LS(LA(LG(F13)))   &trans                &trans                &trans                &trans
+  &trans   &trans   &trans   &trans   &trans                         &trans   &trans   &none       &none   &trans   &trans            &trans                &trans                &trans                &trans                &trans
             >;
         };
 
@@ -809,4 +925,3 @@
 
     };
 };
-
